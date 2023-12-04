@@ -5,39 +5,28 @@
                 <img src={{ asset("assets/logo/logo.png") }} class="w-44 h-44 mx-auto" alt="Logo Buddhi" />
             </div>
             <div class="mx-3 mb-2 sm:col-span-1">
-                <h4 class="mb-2 text-lg font-semibold">Alamat</h4>
-                <h5>Jl. Imam Bonjol No.41, RT.002/RW.003, Karawaci, Kec. Tangerang, Banten, 15115.</h5>
+                <h4 class="mb-2 text-base font-semibold">Alamat</h4>
+                <p class="text-sm sm:text-xs md:text-sm">Jl. Imam Bonjol No.41, RT.002/RW.003, Karawaci, Kec. Tangerang, Banten, 15115.</p>
             </div>
             <div class="mx-3 mb-2 sm:col-span-1">
-                <h4 class="mb-2 text-lg font-semibold">Kontak</h4>
-                <ul class="list-unstyled">
-                    <li class="mb-2">
-                        Telp: (021) 5517853
-                        {{-- @buddhivhs ig --}}
-                    </li>
-                    <li class="mb-2">
-
-                    </li>
-                    <li class="mb-2">
-
-                    </li>
-                    <li class="mb-2">
-
-                    </li>
-                </ul>
+                <h4 class="mb-2 text-base font-semibold">Kontak</h4>
+                <p class="text-sm sm:text-md">
+                    Telp : (021) 5517853 <br />
+                    Instagram : @buddhivhs
+                </p>
             </div>
             <div class="mx-3 sm:col-span-1">
-                <h4 class="mb-2 text-lg font-semibold">Informasi</h4>
-                <ul class="list-unstyled">
-                    <li><a href="/visimisi">Visi dan Misi</a></li>
-                    <li><a href="/fasilitas">Fasilitas</a></li>
-                    <li><a href="/programkeahlian">Program Keahlian</a></li>
-                    <li><a href="/peta">Peta</a></li>
-                    <li><a href="/contact">Hubungi Kami</a></li>
+                <h4 class="mb-2 text-base font-semibold">Informasi</h4>
+                <ul class="list-unstyled text-sm sm:text-xs md:text-sm">
+                    <li><a href="/visimisi" class="hover:text-sky-200">Visi dan Misi</a></li>
+                    <li><a href="/fasilitas" class="hover:text-sky-200">Fasilitas</a></li>
+                    <li><a href="/programkeahlian" class="hover:text-sky-200">Program Keahlian</a></li>
+                    <li><a href="/peta" class="hover:text-sky-200">Peta</a></li>
+                    <li><a href="/contact" class="hover:text-sky-200">Hubungi Kami</a></li>
                 </ul>
             </div>
         </div>
     </div>
     <hr class="w-full border-t-2 border-gray-300" />
-    <p class="mt-2 text-center">Copyright &copy;2023. SMK Buddhi Dharma. All rights reserved.</p>
+    <p class="mt-2 sm:text-xs md:text-sm text-center">Copyright &copy;2023. SMK Buddhi Dharma. All rights reserved.</p>
 </footer>

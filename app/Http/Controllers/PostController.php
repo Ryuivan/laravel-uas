@@ -3,38 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
 
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-
-
-
-class LoginController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-    }
+        $posts = Post::all();
 
-    public function showLoginForm()
-    {
-        return view('auth.login');
-    }
-
-    public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            // Login berhasil
-            return redirect()->intended('/dashboard');
-        } else {
-            // Login gagal
-            return back()->withErrors(['email' => 'Email atau password salah']);
-        }
+        return view('dashboard.posts.index', [
+            "title" => "Posts",
+            "posts" => $posts,
+        ]);
     }
 
     /**

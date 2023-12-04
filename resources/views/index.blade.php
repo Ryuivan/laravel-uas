@@ -2,9 +2,9 @@
 
 @section('content')
   <h1 class="text-3xl font-bold underline text-green-500">Hello
-    @if (isset($name))
-      {{ $name }}
-    @endif
+    @auth
+      {{ auth()->user()->name }}
+    @endauth
     
   </h1>
   <div class="banner">
