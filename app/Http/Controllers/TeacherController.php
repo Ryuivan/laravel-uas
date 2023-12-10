@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Teacher;
 use App\Models\Subject;
+use Illuminate\Support\Facades\Storage;
 
 class TeacherController extends Controller
 {
@@ -13,10 +14,9 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        $teachers = Teacher::all()->paginate(6);
         return view('dashboard.teachers.index', [
             'title' => 'Teachers',
-            'teachers' => $teachers,
+            'teachers' => Teacher::latest()->filter(request(['search']))->paginate(6)->withQueryString(),
         ]);
     }
 
@@ -38,19 +38,20 @@ class TeacherController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255|unique:teachers',
-            'gambar' => 'image|mimes:jpg,jpeg,png'
+            'name' => 'required|string|max:255',
+            'gambar' => 'image|mimes:jpg,jpeg,png|file|max:1024'
         ]);
 
-        $validatedData['gambar'] = $request->file('gambar')->storePublicly('teachers', 'public');
-
+        if ($request->file('gambar'))
+            $validatedData['gambar'] = $request->file('gambar')->storePublicly('teachers', 'public');
+        
         $teacher = new Teacher;
         $teacher->name = $validatedData['name'];
-        $teacher->gambar = $validatedData['gambar'];
+        if ($request->file('gambar')) $teacher->gambar = $validatedData['gambar'];
         $teacher->user_id = auth()->user()->id;
         $teacher->save();
 
-        return redirect('/dashboard/teachers')->with('success', 'Guru baru berhasil ditambahkan!');
+        return redirect('/dashboard/teachers')->with('success', 'Teacher created successfully!');
     }
 
     /**
@@ -66,7 +67,10 @@ class TeacherController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('dashboard.teachers.edit', [
+            'title' => 'Edit Teacher',
+            'teacher' => Teacher::findOrFail($id),
+        ]);
     }
 
     /**
@@ -74,7 +78,25 @@ class TeacherController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'gambar' => 'image|mimes:jpg,jpeg,png|file|max:1024'
+        ]);
+
+        if ($request->file('gambar')) {
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $validatedData['gambar'] = $request->file('gambar')->storePublicly('teachers', 'public');
+        }
+
+        $teacher = Teacher::findOrFail($id);
+        $teacher->name = $validatedData['name'];
+        $teacher->gambar = $validatedData['gambar'];
+        $teacher->user_id = auth()->user()->id;
+        $teacher->save();
+
+        return redirect('/dashboard/teachers')->with('success', 'Teacher updated successfully!');
     }
 
     /**
@@ -83,7 +105,10 @@ class TeacherController extends Controller
     public function destroy(string $id)
     {
         $teacher = Teacher::findOrFail($id);
-        $teacher->delete();
-        return redirect('/dashboard/teachers')->with('success', 'Guru berhasil dihapus!');
+        if ($teacher->gambar) {
+            Storage::delete($teacher->gambar);
+        }
+        Teacher::destroy($id);
+        return redirect('/dashboard/teachers')->with('success', 'Teacher deleted successfully!');
     }
 }

@@ -30,7 +30,7 @@
 </head>
 
 <body class="bg-[#f7f7f7] flex overflow-x-hidden flex-nowrap">
-    @include('components.sidebar')
+    @include('nav-foot.sidebar')
     @yield('content')
 
     <script src="https://kit.fontawesome.com/d0dd0879d3.js" crossorigin="anonymous"></script>

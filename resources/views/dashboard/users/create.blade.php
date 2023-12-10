@@ -3,7 +3,7 @@
 @section('content')
 <div class="min-h-screen bg-[#f7f7f7] flex items-center justify-center w-full">
     <div class="bg-white p-8 rounded-md shadow-lg w-full max-w-md">
-        <div class="text-2xl font-semibold mb-6">{{ __('Tambah Akun') }}</div>
+        <div class="text-2xl font-semibold mb-6">{{ __('Create Account') }}</div>
 
         <form method="POST" action="{{ route('users.store') }}" class="space-y-4">
             @csrf
@@ -33,7 +33,7 @@
             <div>
                 <label for="role" class="block text-sm font-medium text-gray-600">{{ __('Role') }}</label>
                 <select name="is_admin" id="role" class="form-input mt-1 border border-gray-300 block w-full py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                    <option value="" disabled selected>Pilih role</option>
+                    <option value="" disabled selected>Choose</option>
                     <option value="0" {{ old('is_admin') == '0' ? 'selected' : '' }}>User</option>
                     <option value="1" {{ old('is_admin') == '1' ? 'selected' : '' }}>Admin</option>
                 </select>
@@ -63,7 +63,7 @@
 
             <div>
                 <button type="submit" class="bg-[#213d5d] text-white px-4 py-2 rounded-md w-full">
-                    {{ __('Register') }}
+                    {{ __('Create') }}
                 </button>
             </div>
         </form>

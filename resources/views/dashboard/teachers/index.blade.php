@@ -2,7 +2,7 @@
 @section('content')
 <div class="container mx-auto px-5 md:px-10 xl:px-20 overflow-x-hidden">
 
-    <h1 class="text-2xl mb-8 text-center font-semibold uppercase mt-16">Guru</h1>
+    <h1 class="text-2xl mb-8 text-center font-semibold uppercase mt-16">Teachers</h1>
     @if (session()->has('success'))
     <div class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50"
         role="alert">
@@ -17,24 +17,38 @@
         </div>
     </div>
     @endif
-    <div class="flex justify-end">
+    <div class="flex flex-wrap justify-center space-x-5 md:justify-between">
         <a href="/dashboard/teachers/create"
             class="transition duration-300 bg-[#315887] hover:bg-[#1C314C] text-white px-4 py-2 rounded-md mb-4">
-            Tambah guru <i class="fa-solid fa-plus"></i>
+            Add Teacher <i class="fa-solid fa-plus"></i>
         </a>
+        <form action="/dashboard/teachers">
+            <input type="text" name="search"
+                class="border border-gray-200 rounded-md p-2 focus:outline-none h-9 w-40 md:w-60" placeholder="Search"
+                value="{{ request('search') }}">
+            <button type="submit"
+                class="inline transition duration-300 bg-[#315887] hover:bg-[#1C314C] text-white px-4 py-2 rounded-md mb-4">
+                <i class="fa-solid fa-search"></i>
+            </button>
+        </form>
     </div>
     @if ($teachers->isEmpty())
     <div class="flex justify-center items-center h-32">
-        <span class="text-gray-400 font-medium">Belum ada guru</span>
+        <span class="text-gray-400 font-medium">Teacher not found</span>
     </div>
     @else
 
     <div class="flex justify-center flex-wrap">
         @foreach ($teachers as $teacher)
-
-        <div class="flex flex-col items-center my-5 mx-4 w-[400px] bg-white border border-gray-200 rounded-lg shadow md:flex-row">
+        <div
+            class="flex flex-col items-center my-5 mx-4 w-[400px] bg-white border border-gray-200 rounded-lg shadow md:flex-row">
+            @if ($teacher->gambar)
             <img class="object-cover w-full rounded-t-lg h-56 md:h-48 md:w-48 md:rounded-none md:rounded-s-lg"
                 src="{{ asset('storage/' . $teacher->gambar) }}" alt="{{ $teacher->name }}">
+            @else
+            <img class="object-cover w-full rounded-t-lg h-56 md:h-48 md:w-48 md:rounded-none md:rounded-s-lg"
+                src="{{ asset('assets/profile/usernull.jpg') }}" alt="{{ $teacher->name }}">
+            @endif
             <div class="flex flex-col w-52 justify-between p-4 leading-normal">
                 <h5 class="mb-4 text-xl h-16 font-semibold tracking-tight text-gray-900">{{ $teacher->name }}</h5>
                 <div class="flex space-x-2 justify-start">
@@ -45,60 +59,19 @@
                     <form action="/dashboard/teachers/{{ $teacher->id }}" method="POST" class="">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" onclick="return confirm('Apakah anda yakin ingin menghapus guru ini?')"
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete this teacher?')"
                             class="transition duration-300 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md">
                             <i class="fa-solid fa-trash"></i>
                         </button>
                     </form>
                 </div>
             </div>
-
-
         </div>
         @endforeach
     </div>
-
-    {{-- <div class="relative overflow-x-auto">
-
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-            <thead class="text-base text-gray-700 uppercase bg-gray-300">
-                <tr>
-                    <th scope="col" class="px-6 py-3">Nama</th>
-                    <th scope="col" class="px-6 py-3">Dibuat oleh</th>
-                    <th scope="col" class="px-6 py-3">Tanggal dibuat</th>
-                    <th scope="col" class="px-6 py-3">Action</th>
-                </tr>
-            </thead>
-            <tbody class="bg-white border-b">
-                @foreach ($teachers as $teacher)
-                <tr class="text-sm">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{
-                        $teacher->name }}</th>
-                    <td class="px-6 py-4">{{ $teacher->user->name }}</td>
-                    <td class="px-6 py-4">{{ $teacher->created_at }}</td>
-                    <td class="px-6 py-4 flex space-x-1">
-                        <a href="/dashboard/teachers/{{ $teacher->id }}"
-                            class="transition duration-300 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md"><i
-                                class="fa-solid fa-eye"></i></a>
-                        <a href="/dashboard/teachers/{{ $teacher->id }}/edit"
-                            class="transition duration-300 bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md">
-                            <i class="fa-solid fa-edit"></i>
-                        </a>
-                        <form action="/dashboard/teachers/{{ $teacher->id }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit"
-                                onclick="return confirm('Apakah anda yakin ingin menghapus guru ini?')"
-                                class="transition duration-300 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div> --}}
+    <div class="mb-5">
+        {{ $teachers->links() }}
+    </div>
     @endif
 </div>
 @endsection

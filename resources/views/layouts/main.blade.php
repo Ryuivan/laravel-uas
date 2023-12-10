@@ -25,11 +25,11 @@
 </head>
 
 <body>
-    @include('components.navbar')
+    @include('nav-foot.navbar')
 
     @yield('content')
 
-    @include('components.footer')
+    @include('nav-foot.footer')
     <script src="https://kit.fontawesome.com/d0dd0879d3.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.1/flowbite.min.js"></script>
 </body>

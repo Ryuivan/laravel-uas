@@ -45,7 +45,7 @@
                             </svg>
                         </button>
                         <div id="dropdownTentang"
-                            class="z-10 hidden font-normal bg-[#e9e8e5] divide-y divide-gray-100 rounded-lg shadow w-44">
+                            class="z-10 hidden font-normal bg-[#e9e8e5] divide-y divide-gray-100 rounded-lg shadow w-full lg:w-44">
                             <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
                                 <ul class="dropdown-menu">
                                     <a href="/visi-misi" class="block px-4 py-2 hover:bg-gray-100">Visi dan Misi</a>
@@ -59,7 +59,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li>
+                    <li class="relative">
                         <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownKesiswaan"
                             class="transition duration-300 flex items-center justify-between w-full py-2 px-3 text-white rounded hover:text-[#223d5d] lg:hover:bg-transparent lg:border-0 lg:hover:text-[#223d5d] lg:p-0 lg:w-auto border-gray-700">Kesiswaan
                             <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -68,10 +68,10 @@
                                     stroke-width="2" d="m1 1 4 4 4-4" />
                             </svg></button>
                         <div id="dropdownKesiswaan"
-                            class="z-10 hidden font-normal bg-[#e9e8e5] divide-y divide-gray-100 rounded-lg shadow w-44 ">
+                            class="z-10 hidden font-normal bg-[#e9e8e5] divide-y divide-gray-100 rounded-lg shadow w-full lg:w-44">
                             <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
                                 <li>
-                                    <a href="/ekstrakulikuler"
+                                    <a href="/ekstrakurikuler"
                                         class="block px-4 py-2 hover:bg-gray-100">Ekstrakurikuler</a>
                                 </li>
                                 <li>
@@ -83,7 +83,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li>
+                    <li class="relative">
                         <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownProgramKeahlian"
                             class="transition duration-300 flex items-center justify-between w-full py-2 px-3 text-white rounded hover:text-[#223d5d] lg:hover:bg-transparent lg:border-0 lg:hover:text-[#223d5d] lg:p-0 lg:w-auto border-gray-700">Program
                             Keahlian
@@ -94,7 +94,7 @@
                             </svg>
                         </button>
                         <div id="dropdownProgramKeahlian"
-                            class="z-10 hidden font-normal bg-[#e9e8e5] divide-y divide-gray-100 rounded-lg shadow w-44 ">
+                            class="z-10 hidden font-normal bg-[#e9e8e5] divide-y divide-gray-100 rounded-lg shadow w-full lg:w-44">
                             <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
                                 <li>
                                     <a href="/akuntansi" class="block px-4 py-2 hover:bg-gray-100">Akuntansi</a>
@@ -108,38 +108,48 @@
                         <a href="/gallery"
                             class="transition duration-300 block py-2 px-3 rounded lg:hover:bg-transparent lg:hover:text-[#223d5d] lg:p-0 {{ ($title === 'Gallery') ? 'text-[#223d5d]': ' text-white'}}">Gallery</a>
                     </li>
-                    @auth 
-                        <li>
-                                <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownUser"
-                                    class="transition duration-300 flex items-center justify-between w-full py-2 px-3 text-white rounded hover:text-[#223d5d] lg:hover:bg-transparent lg:border-0 lg:hover:text-[#223d5d] lg:p-0 lg:w-auto border-gray-700">{{ auth()->user()->name }}
-                                    <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 10 6">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="m1 1 4 4 4-4" />
-                                    </svg>
-                                </button>
-                                <div id="dropdownUser"
-                                    class="z-10 hidden font-normal bg-[#e9e8e5] divide-y divide-gray-100 rounded-lg shadow w-44 ">
-                                    @if (auth()->user()->is_admin === 1)
-                                        <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
-                                            <li>
-                                                <a href="/dashboard" class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
-                                            </li>
-                                        </ul>
-                                    @endif
-                                    <div class="py-2">
-                                        <form action="/logout" method="post" class="inline-block w-full">
-                                            @csrf
-                                            <button type="submit" class="text-left w-full px-4 py-2 text-sm hover:bg-gray-100">Logout <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
-                                        </form>
-                                    </div>
-                                </div>
-                            <li>
-                    @else
-                        <li>
-                            <a href="/login"
+                    @auth
+                    <li class="relative">
+                        <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownUser"
+                            class="z-10 transition duration-300 flex items-center justify-between w-full py-2 px-3 text-white rounded hover:text-[#223d5d] lg:hover:bg-transparent lg:border-0 lg:hover:text-[#223d5d] lg:p-0 lg:w-auto border-gray-700">{{
+                            auth()->user()->name }}
+                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 4 4 4-4" />
+                            </svg>
+                        </button>
+                        <div id="dropdownUser"
+                            class="hidden font-normal bg-[#e9e8e5] divide-y divide-gray-100 rounded-lg shadow w-full lg:w-44">
+                            <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
+                                <li>
+                                    <a href="/users/{{ auth()->user()->id }}/edit"
+                                        class="block px-4 py-2 hover:bg-gray-100">Edit Profile</a>
+                                </li>
+                            </ul>
+
+                            @if (auth()->user()->is_admin === 1)
+                            <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
+                                <li>
+                                    <a href="/dashboard" class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
+                                </li>
+                            </ul>
+                            @endif
+                            <div class="py-2">
+                                <form action="/logout" method="post" class="inline-block w-full">
+                                    @csrf
+                                    <button type="submit"
+                                        class="text-left w-full px-4 py-2 text-sm hover:bg-gray-100">Logout <i
+                                            class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    <li>
+                        @else
+                    <li>
+                        <a href="/login"
                             class="transition duration-300 block py-2 px-3 rounded lg:hover:bg-transparent lg:hover:text-[#223d5d] lg:p-0 {{ ($title === 'Login') ? 'text-[#223d5d]': ' text-white'}}">Login</a>
-                        </li>
+                    </li>
                     @endauth
                 </ul>
             </div>

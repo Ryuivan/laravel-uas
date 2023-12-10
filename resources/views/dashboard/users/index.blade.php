@@ -17,15 +17,24 @@
         </div>
     </div>
     @endif
-    <div class="flex justify-end">
+    <div class="flex flex-wrap justify-center space-x-5 md:justify-between">
         <a href="/dashboard/users/create"
             class="transition duration-300 bg-[#315887] hover:bg-[#1C314C] text-white px-4 py-2 rounded-md mb-4">
-            Tambah akun <i class="fa-solid fa-plus"></i>
+            Add Account <i class="fa-solid fa-plus"></i>
         </a>
+        <form action="/dashboard/users">
+            <input type="text" name="search"
+                class="border border-gray-200 rounded-md p-2 focus:outline-none h-9 w-40 md:w-60" placeholder="Search"
+                value="{{ request('search') }}">
+            <button type="submit"
+                class="inline transition duration-300 bg-[#315887] hover:bg-[#1C314C] text-white px-4 py-2 rounded-md mb-4">
+                <i class="fa-solid fa-search"></i>
+            </button>
+        </form>
     </div>
     @if ($users->isEmpty())
     <div class="flex justify-center items-center h-32">
-        <span class="text-gray-400 font-medium">Belum ada akun</span>
+        <span class="text-gray-400 font-medium">Account not found</span>
     </div>
     @else
     <div class="relative overflow-x-auto">
@@ -35,7 +44,7 @@
                     <th scope="col" class="px-6 py-3">Name</th>
                     <th scope="col" class="px-6 py-3">Email</th>
                     <th scope="col" class="px-6 py-3">Role</th>
-                    <th scope="col" class="px-6 py-3">Tanggal dibuat</th>
+                    <th scope="col" class="px-6 py-3">Created at</th>
                     <th scope="col" class="px-6 py-3">Action</th>
                 </tr>
             </thead>
@@ -47,16 +56,12 @@
                     <td class="px-6 py-4" class="px-6 py-4">{{ $user->email }}</td>
                     <td class="px-6 py-4">{{ $user->is_admin ? 'Admin' : 'User' }}</td>
                     <td class="px-6 py-4">{{ $user->created_at }}</td>
-                    <td class="px-6 py-4 flex space-x-1">
-                        <a href="/dashboard/users/{{ $user->id }}/edit"
-                            class="transition duration-300 bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md">
-                            <i class="fa-solid fa-edit"></i>
-                        </a>
+                    <td class="px-6 py-4">
                         <form action="/dashboard/users/{{ $user->id }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit"
-                                onclick="return confirm('Apakah anda yakin ingin menghapus akun ini?')"
+                                onclick="return confirm('Are you sure you want to delete this account?')"
                                 class="transition duration-300 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md">
                                 <i class="fa-solid fa-trash"></i>
                             </button>

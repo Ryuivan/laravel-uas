@@ -12,6 +12,12 @@ class Teacher extends Model
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    public function scopeFilter($query, array $filters) {
+        $query->when($filters['search'] ?? false, function($query, $search) {
+            return $query->where('name', 'like', '%' . $search . '%');
+        });
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

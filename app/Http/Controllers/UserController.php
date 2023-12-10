@@ -12,10 +12,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
         return view('dashboard.users.index', [
             'title' => 'Account',
-            'users' => $users
+            'users' => User::latest()->filter(request(['search']))->get(),
         ]);
     }
 
@@ -48,7 +47,7 @@ class UserController extends Controller
         $user->password = bcrypt($request->password);
         $user->save();
 
-        return redirect('/dashboard/users')->with('success', 'User has been created!');
+        return redirect('/dashboard/users')->with('success', 'Account created successfully!');
     }
 
     /**
@@ -56,7 +55,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        
+        return abort(403);
     }
 
     /**
@@ -64,11 +63,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        $user = User::findOrFail($id);
-        return view('dashboard.users.edit', [
-            'title' => 'Edit Account',
-            'user' => $user
-        ]);
+        return abort(403);
     }
 
     /**
@@ -88,7 +83,7 @@ class UserController extends Controller
         $validatedData = $request->validate($rules);
 
         User::findOrFail($id)->update($validatedData);
-        return redirect('/dashboard/users')->with('success', 'Akun berhasil diupdate!');
+        return redirect('/dashboard/users')->with('success', 'Account updated successfully!');
     }
 
     /**
@@ -97,6 +92,6 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         User::destroy($id);
-        return redirect('/dashboard/users')->with('success', 'User has been deleted!');
+        return redirect('/dashboard/users')->with('success', 'Account deleted successfully!');
     }
 }

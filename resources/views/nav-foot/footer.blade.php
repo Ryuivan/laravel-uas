@@ -18,10 +18,9 @@
             <div class="mx-3 sm:col-span-1">
                 <h4 class="mb-2 text-base font-semibold">Informasi</h4>
                 <ul class="list-unstyled text-sm sm:text-xs md:text-sm">
-                    <li><a href="/visimisi" class="hover:text-sky-200">Visi dan Misi</a></li>
+                    <li><a href="/visi-misi" class="hover:text-sky-200">Visi dan Misi</a></li>
                     <li><a href="/fasilitas" class="hover:text-sky-200">Fasilitas</a></li>
-                    <li><a href="/programkeahlian" class="hover:text-sky-200">Program Keahlian</a></li>
-                    <li><a href="/peta" class="hover:text-sky-200">Peta</a></li>
+                    <li><a href="/akuntansi" class="hover:text-sky-200">Akuntansi</a> | <a href="/multimedia" class="hover:text-sky-200">Multimedia</a></li>
                     <li><a href="/contact" class="hover:text-sky-200">Hubungi Kami</a></li>
                 </ul>
             </div>
