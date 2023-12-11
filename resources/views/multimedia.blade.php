@@ -12,21 +12,22 @@
         </div>
         <div class="bg-[#f7f7f7]">
             <div class="container mx-auto py-24 px-5 md:px-10 xl:px-20">
-                <div class="flex flex-wrap flex-col md:flex-row">
-                    <div class="mt-8 md:mt-0 md:w-1/2 px-8">
-                        <h1 class="text-center text-3xl font-medium">Tujuan Program Keahlian Multimedia</h1>
+                <div class="mx-auto flex flex-wrap-reverse xl:flex-wrap flex-row">
+                    <div class="mt-8 mx-auto sm:min-w-2/4 md:w-3/4 lg:w-5/6 xl:w-3/6 px-8 animate__animated animate__slideInLeft">
+                        <h1 class="text-center text-2xl md:text-3xl lg:text-3xl xl:text-3xl font-medium">Tujuan Program Keahlian Multimedia</h1>
                         <p class="font-normal text-base mt-5 text-justify">Mencetak tenaga ahli madya profesional dalam bidang Multimedia yang berbasis teknologi komputer yang berorientasi pada kebutuhan dunia usaha dan industri dengan spesifikasi kompetensi sebagai berikut:</p>
-                    </div>
-                    <div class="mt-8 md:mt-0 md:w-1/2 px-8">
                         <ol class="list-decimal font-normal text-base mt-5 text-justify">
-                            <li>Pembuatan dan pengelolaan Web Design.</li>
-                            <li>Pembuatan video klip dan penyuntingan video.</li>
-                            <li>Pembuatan animasi dan bekerja dibidang periklanan.</li>
-                            <li>Pembuatan CD Interaktif.</li>
-                            <li>Merekam dan menyuting Audio Video.</li>
-                            <li>Mengembangkan aplikasi Multimedia Interaktif.</li>
-                            <li>Mampu berkomunikasi dalam Bahasa Inggris.</li>
+                            <li class="ml-3">Pembuatan dan pengelolaan Web Design.</li>
+                            <li class="ml-3">Pembuatan video klip dan penyuntingan video.</li>
+                            <li class="ml-3">Pembuatan animasi dan bekerja dibidang periklanan.</li>
+                            <li class="ml-3">Pembuatan CD Interaktif.</li>
+                            <li class="ml-3">Merekam dan menyuting Audio Video.</li>
+                            <li class="ml-3">Mengembangkan aplikasi Multimedia Interaktif.</li>
+                            <li class="ml-3">Mampu berkomunikasi dalam Bahasa Inggris.</li>
                         </ol>
+                    </div>
+                    <div class="mx-auto mt-8 md:mt-0 md:w-3/4 xl:w-3/6 px-8 animate__animated animate__slideInRight">
+                        <img src="{{ asset('assets/programkeahlian/multimedia.jpg') }}" alt="multimedia" class="mx-auto xl:mt-4">
                     </div>
                 </div>
             </div>

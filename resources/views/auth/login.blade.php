@@ -14,7 +14,7 @@
             </svg>
             <span class="sr-only">Info</span>
             <div>
-                <span class="font-medium">Login gagal!</span> {{ session('loginError') }}
+                <span class="font-medium">Login failed!</span> {{ session('loginError') }}
             </div>
         </div>
         @endif
@@ -52,10 +52,10 @@
 
             @if (Route::has('password.request'))
             <a class="text-blue-500 text-sm hover:text-gray-300" href="{{ route('password.request') }}">
-                {{ __('Forgot Your Password?') }}
+                {{ __('Forgot Password?') }}
             </a> <br>
             <a class="text-blue-500 text-sm hover:text-gray-300" href="/register">
-                {{ __('Registrasi akun') }}
+                {{ __('Register') }}
             </a>
             @endif
         </form>

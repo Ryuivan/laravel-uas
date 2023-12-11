@@ -15,8 +15,8 @@ class FasilitasController extends Controller
     {
         $fasilitass = Fasilitas::latest()->filter(request(['search']))->paginate(6)->withQueryString();
 
-        return view('dashboard.Fasilitas.index', [
-            'title' => 'Fasilitas',
+        return view('dashboard.fasilitas.index', [
+            'title' => 'Facilities',
             'fasilitass' => $fasilitass,
         ]);
     }
@@ -27,8 +27,8 @@ class FasilitasController extends Controller
     public function create()
     {
         $fasilitass = Fasilitas::all();
-        return view('dashboard.Fasilitas.create', [
-            'title' => 'Create Fasilitas',
+        return view('dashboard.fasilitas.create', [
+            'title' => 'Create Facility',
             'fasilitass' => $fasilitass,
         ]);
     }
@@ -39,12 +39,12 @@ class FasilitasController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:fasilitas',
             'gambar' => 'image|mimes:jpg,jpeg,png|file|max:1024'
         ]);
 
         if ($request->file('gambar'))
-            $validatedData['gambar'] = $request->file('gambar')->storePublicly('fasilitass', 'public');
+            $validatedData['gambar'] = $request->file('gambar')->storePublicly('fasilitas', 'public');
         
         $fasilitas = new Fasilitas;
         $fasilitas->name = $validatedData['name'];
@@ -52,7 +52,7 @@ class FasilitasController extends Controller
         $fasilitas->user_id = auth()->user()->id;
         $fasilitas->save();
 
-        return redirect('/dashboard/fasilitas')->with('success', 'Fasilitas baru berhasil ditambahkan!');
+        return redirect('/dashboard/facilities')->with('success', 'Facility created successfully!');
     }
 
     /**
@@ -60,7 +60,7 @@ class FasilitasController extends Controller
      */
     public function show(string $id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -68,8 +68,8 @@ class FasilitasController extends Controller
      */
     public function edit(string $id)
     {
-        return view('dashboard.fasilitass.edit', [
-            'title' => 'Edit Fasilitas',
+        return view('dashboard.fasilitas.edit', [
+            'title' => 'Edit Facility',
             'fasilitas' => Fasilitas::findOrFail($id),
         ]);
     }
@@ -80,7 +80,7 @@ class FasilitasController extends Controller
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:fasilitas,name,' . $id . ',id',
             'gambar' => 'image|mimes:jpg,jpeg,png|file|max:1024'
         ]);
 
@@ -88,16 +88,16 @@ class FasilitasController extends Controller
             if ($request->oldImage) {
                 Storage::delete($request->oldImage);
             }
-            $validatedData['gambar'] = $request->file('gambar')->storePublicly('fasilitass', 'public');
+            $validatedData['gambar'] = $request->file('gambar')->storePublicly('fasilitas', 'public');
         }
 
         $fasilitas = Fasilitas::findOrFail($id);
         $fasilitas->name = $validatedData['name'];
-        $fasilitas->gambar = $validatedData['gambar'];
+        if ($request->file('gambar')) $fasilitas->gambar = $validatedData['gambar'];
         $fasilitas->user_id = auth()->user()->id;
         $fasilitas->save();
 
-        return redirect('/dashboard/fasilitas')->with('success', 'Fasilitas berhasil diubah!');
+        return redirect('/dashboard/facilities')->with('success', 'Facility updated successfully!');
     }
 
     /**
@@ -110,6 +110,6 @@ class FasilitasController extends Controller
             Storage::delete($fasilitas->gambar);
         }
         Fasilitas::destroy($id);
-        return redirect('/dashboard/fasilitas')->with('success', 'Fasilitas berhasil dihapus!');
+        return redirect('/dashboard/facilities')->with('success', 'Facility deleted successfully!');
     }
 }

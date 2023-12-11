@@ -9,11 +9,11 @@
         </div>
     </div>
     <div class="bg-[#f7f7f7] p-4">
-        <div class="p-5 m-5 flex flex-wrap gap-6 justify-center">
+        <div class="p-5 md:px-0 m-5 md:mx-0 flex flex-wrap gap-6 justify-center animate__animated animate__slideInUp">
             @foreach($ekstrakurikulers as $ekstrakurikuler)
-                <div class="m-5 bg-white p-4 shadow-md">
-                    <p class="mb-2 text-lg font-semibold">{{ $ekstrakurikuler->name }}</p>
-                    <img src="{{ asset('storage/' . $ekstrakurikuler->gambar) }}" alt="{{ $ekstrakurikuler->name }} Image" class="w-64 h-48 object-cover rounded-md">
+                <div class="m-5 bg-white p-5 shadow-md sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 rounded-md">
+                    <img src="{{ asset('storage/' . $ekstrakurikuler->gambar) }}" alt="{{ $ekstrakurikuler->name }} Image" class="w-full h-5/6 object-cover rounded-md">
+                    <p class="mt-4 text-lg font-semibold">{{ $ekstrakurikuler->name }}</p>
                 </div>
             @endforeach
         </div>

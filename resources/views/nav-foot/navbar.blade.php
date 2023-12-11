@@ -75,7 +75,7 @@
                                         class="block px-4 py-2 hover:bg-gray-100">Ekstrakurikuler</a>
                                 </li>
                                 <li>
-                                    <a href="/osis" class="block px-4 py-2 hover:bg-gray-100">OSIS</a>
+                                    <a href="/guru" class="block px-4 py-2 hover:bg-gray-100">Guru</a>
                                 </li>
                                 <li>
                                     <a href="/prestasi" class="block px-4 py-2 hover:bg-gray-100">Prestasi</a>

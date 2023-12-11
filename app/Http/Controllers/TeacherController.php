@@ -38,7 +38,7 @@ class TeacherController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:teachers', 
             'gambar' => 'image|mimes:jpg,jpeg,png|file|max:1024'
         ]);
 
@@ -59,7 +59,7 @@ class TeacherController extends Controller
      */
     public function show(string $id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -79,7 +79,7 @@ class TeacherController extends Controller
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:teachers,name,' . $id,
             'gambar' => 'image|mimes:jpg,jpeg,png|file|max:1024'
         ]);
 

@@ -2,7 +2,7 @@
 @section('content')
 <div class="container mx-auto px-5 md:px-10 xl:px-20 overflow-x-hidden">
 
-    <h1 class="text-2xl mb-8 text-center font-semibold uppercase mt-16">Fasilitas</h1>
+    <h1 class="text-2xl mb-8 text-center font-semibold uppercase mt-16">Facilities</h1>
     @if (session()->has('success'))
     <div class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50"
         role="alert">
@@ -18,13 +18,13 @@
     </div>
     @endif
     <div class="flex flex-wrap justify-center space-x-5 md:justify-between">
-        <a href="/dashboard/fasilitas/create"
+        <a href="/dashboard/facilities/create"
             class="transition duration-300 bg-[#315887] hover:bg-[#1C314C] text-white px-4 py-2 rounded-md mb-4">
-            Tambah fasilitas <i class="fa-solid fa-plus"></i>
+            Add Facility <i class="fa-solid fa-plus"></i>
         </a>
-        <form action="/dashboard/fasilitas">
+        <form action="/dashboard/facilities">
             <input type="text" name="search"
-                class="border border-gray-200 rounded-md p-2 focus:outline-none h-9 w-40 md:w-60" placeholder="Cari"
+                class="border border-gray-200 rounded-md p-2 focus:outline-none h-9 w-40 md:w-60" placeholder="Search"
                 value="{{ request('search') }}">
             <button type="submit"
                 class="inline transition duration-300 bg-[#315887] hover:bg-[#1C314C] text-white px-4 py-2 rounded-md mb-4">
@@ -34,7 +34,7 @@
     </div>
     @if ($fasilitass->isEmpty())
     <div class="flex justify-center items-center h-32">
-        <span class="text-gray-400 font-medium">Belum ada fasilitas</span>
+        <span class="text-gray-400 font-medium">Facility not found</span>
     </div>
     @else
 
@@ -52,14 +52,14 @@
             <div class="flex flex-col w-52 justify-between p-4 leading-normal">
                 <h5 class="mb-4 text-xl h-16 font-semibold tracking-tight text-gray-900">{{ $fasilitas->name }}</h5>
                 <div class="flex space-x-2 justify-start">
-                    <a href="/dashboard/fasilitas/{{ $fasilitas->id }}/edit"
+                    <a href="/dashboard/facilities/{{ $fasilitas->id }}/edit"
                         class="transition duration-300 bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md">
                         <i class="fa-solid fa-edit"></i>
                     </a>
-                    <form action="/dashboard/fasilitas/{{ $fasilitas->id }}" method="POST" class="">
+                    <form action="/dashboard/facilities/{{ $fasilitas->id }}" method="POST" class="">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" onclick="return confirm('Apakah anda yakin ingin menghapus fasilitas ini?')"
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete this facility?')"
                             class="transition duration-300 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md">
                             <i class="fa-solid fa-trash"></i>
                         </button>

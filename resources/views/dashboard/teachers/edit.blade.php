@@ -33,7 +33,7 @@
 
                 <img class="img-preview">
                 <input
-                    class="form-input mt-1 block w-full mb-5 text-xs text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 @error('gambar') border-red-500 @enderror"
+                    class="mt-1 block w-full mb-5 text-xs text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 @error('gambar') border-red-500 @enderror"
                     id="gambar" type="file" value="{{ 'storage/' . $teacher->gambar }}" name="gambar"
                     onchange="previewImage()">
 

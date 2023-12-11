@@ -4,9 +4,9 @@
 
 <div class="min-h-screen bg-[#f7f7f7] flex items-center justify-center w-full">
     <div class="bg-white p-8 rounded-md shadow-lg w-full max-w-md">
-        <div class="text-2xl font-semibold mb-6">{{ __('Edit Akun') }}</div>
+        <div class="text-2xl font-semibold mb-6">{{ __('Edit Profile') }}</div>
 
-        <form method="POST" action="/dashboard/users/{{ $user->id }}" class="space-y-4">
+        <form method="POST" action="{{ route('users.update', $user->id) }}" class="space-y-4">
             @method('PUT')
             @csrf
 
@@ -34,7 +34,7 @@
 
             <div>
                 <button type="submit" class="bg-[#213d5d] text-white px-4 py-2 rounded-md w-full">
-                    {{ __('Ubah') }}
+                    {{ __('Update') }}
                 </button>
             </div>
         </form>

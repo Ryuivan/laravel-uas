@@ -1,7 +1,7 @@
 @extends('dashboard.index')
 @section('content')
+
 <div class="container mx-auto px-5 md:px-10 xl:px-20 overflow-x-hidden">
-   
     <h1 class="text-2xl mb-8 text-center font-semibold uppercase mt-16">Accounts</h1>
     @if (session()->has('success'))
     <div class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50"

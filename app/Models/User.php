@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Auth\Notifications\ResetPassword; // Added this line
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -63,12 +64,51 @@ class User extends Authenticatable implements MustVerifyEmail
      * Get the teacher associated with the user.
      */
 
-    public function scopeFilter($query, array $filters) {
-        $query->when($filters['search'] ?? false, function($query, $search) {
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
             return $query->where('name', 'like', '%' . $search . '%');
         });
     }
-    public function teacher() {
-        return $this->hasOne(Teacher::class);
+
+    public function teacher()
+    {
+        return $this->hasMany(Teacher::class);
+    }
+
+    public function fasilitas()
+    {
+        return $this->hasMany(Fasilitas::class);
+    }
+
+    public function ekstrakurikuler()
+    {
+        return $this->hasMany(Ekstrakurikuler::class);
+    }
+
+    public function prestasi()
+    {
+        return $this->hasMany(Prestasi::class);
+    }
+
+    public function post()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function carousel()
+    {
+        return $this->hasMany(Carousel::class);
+    }
+
+    public function category()
+    {
+        return $this->hasMany(Category::class);
+    }
+
+    // Override the sendPasswordResetNotification method
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPassword($token));
     }
 }

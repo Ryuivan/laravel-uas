@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -11,7 +12,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.categories.index', [
+            'title' => 'Category',
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -19,7 +23,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.categories.create', [
+            'title' => 'Create Category',
+        ]);
     }
 
     /**
@@ -27,7 +33,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255|unique:categories',
+            'slug' => 'required|string|max:255|unique:categories'
+        ]);
+        
+        $category = new Category;
+        $category->name = $validatedData['name'];
+        $category->slug = $validatedData['slug'];
+        $category->save();
+
+        return redirect('/dashboard/categories')->with('success', 'Category created successfully!');
     }
 
     /**
@@ -35,7 +51,7 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        abort(404);
     }
 
     /**

@@ -55,7 +55,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        return abort(403);
+        return abort(404);
     }
 
     /**
@@ -63,7 +63,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        return abort(403);
+        return abort(404);
     }
 
     /**

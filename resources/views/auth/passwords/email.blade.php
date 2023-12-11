@@ -1,4 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.main')
+
+<?php
+$title = 'Forgot Password';
+?>
 
 @section('content')
 <div class="container">
@@ -45,3 +49,4 @@
     </div>
 </div>
 @endsection
+@section('title', 'Forgot Password')

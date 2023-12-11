@@ -28,7 +28,7 @@ class AuthController extends Controller
         }
 
         // Login gagal
-        return back()->with('loginError', 'silakan cek email dan password Anda.');
+        return back()->with('loginError', 'Please check your email and password.');
     }
 
     public function showRegistrationForm()

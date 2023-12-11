@@ -39,28 +39,32 @@ class EkstrakurikulerController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:ekstrakurikulers',
             'gambar' => 'image|mimes:jpg,jpeg,png|file|max:1024'
         ]);
 
-        if ($request->file('gambar'))
+        if ($request->file('gambar')) {
             $validatedData['gambar'] = $request->file('gambar')->storePublicly('ekstrakurikulers', 'public');
-        
+        }
+
         $ekstrakurikuler = new Ekstrakurikuler;
         $ekstrakurikuler->name = $validatedData['name'];
-        if ($request->file('gambar')) $ekstrakurikuler->gambar = $validatedData['gambar'];
+        if ($request->file('gambar')) {
+            $ekstrakurikuler->gambar = $validatedData['gambar'];
+        }
         $ekstrakurikuler->user_id = auth()->user()->id;
-        $ekstrakurikuler->save();
 
-        return redirect('/dashboard/ekstrakurikulers')->with('success', 'Ekskul baru berhasil ditambahkan!');
+        $ekstrakurikuler->save();
+        return redirect('/dashboard/extracurriculars')->with('success', 'Extracurricular created successfully!');
     }
+
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -80,7 +84,7 @@ class EkstrakurikulerController extends Controller
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:ekstrakurikulers,name,' . $id, 
             'gambar' => 'image|mimes:jpg,jpeg,png|file|max:1024'
         ]);
 
@@ -93,11 +97,11 @@ class EkstrakurikulerController extends Controller
 
         $ekstrakurikuler = Ekstrakurikuler::findOrFail($id);
         $ekstrakurikuler->name = $validatedData['name'];
-        $ekstrakurikuler->gambar = $validatedData['gambar'];
+        if ($request->file('gambar')) $ekstrakurikuler->gambar = $validatedData['gambar'];
         $ekstrakurikuler->user_id = auth()->user()->id;
         $ekstrakurikuler->save();
 
-        return redirect('/dashboard/ekstrakurikulers')->with('success', 'Ekskul berhasil diubah!');
+        return redirect('/dashboard/extracurriculars')->with('success', 'Extracurricular updated successfully!');
     }
 
     /**
@@ -110,6 +114,6 @@ class EkstrakurikulerController extends Controller
             Storage::delete($ekstrakurikuler->gambar);
         }
         Ekstrakurikuler::destroy($id);
-        return redirect('/dashboard/ekstrakurikulers')->with('success', 'Ekskul berhasil dihapus!');
+        return redirect('/dashboard/extracurriculars')->with('success', 'Extracurricular deleted successfully!');
     }
 }
