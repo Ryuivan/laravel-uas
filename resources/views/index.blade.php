@@ -27,58 +27,62 @@
         <h1 class="text-4xl font-semibold my-4 text-[#213d5d]">Publikasi</h1>
         <h1 class="text-1xl font-normal mb-4 text-[#213d5d]">Berita, Kegiatan Siswa, dan Artikel Sekolah.</h1>
     </div>
-        
-    <div class="flex flex-wrap justify-center space-x-20 py-8">
+
+    <div class="flex flex-wrap justify-center py-8">
         @foreach($posts as $post)
-        <div class="max-w-sm min-h-md max-h-md bg-white border border-gray-200 rounded-lg shadow">
-            <a href="/posts/{{ $post->slug }}">
-                @if ($post->image)
-                <img class="rounded-t-lg object-cover w-full h-60" src="{{ 'storage/' . $post->image }}"
-                    alt="{{ $post->title }}" />
-                @else
-                <img class="rounded-t-lg object-cover w-full h-60" src="{{ asset('assets/profile/imagenull.png') }}"
-                    alt="{{ $post->title }}" />
-                @endif
-            </a>
-            <div class="p-5 h-full">
-                <a href="/posts/{{ $post->slug }}">
-                    <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900">{{ $post->title }}</h5>
+        <a href="/publikasi/{{ $post->slug }}">
+            <div
+                class="cursor-pointer m-5 min-w-sm max-w-sm max-h-lg min-h-lg bg-white border border-gray-200 rounded-lg hover:shadow-lg hover:scale-105 transition ease-in-out duration-300">
+                <a href="/publikasi/{{ $post->slug }}">
+                    @if ($post->image)
+                    <img class="rounded-t-lg object-cover w-full h-60" src="{{ 'storage/' . $post->image }}"
+                        alt="{{ $post->title }}" />
+                    @else
+                    <img class="rounded-t-lg object-cover w-full h-60" src="{{ asset('assets/profile/imagenull.png') }}"
+                        alt="{{ $post->title }}" />
+                    @endif
                 </a>
-                <p class="mb-3 font-normal text-gray-700 text-justify h-52">{{ $post->excerpt }}</p>
-                <a href="/posts/{{ $post->slug }}"
-                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
-                    Read more
-                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 14 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M1 5h12m0 0L9 1m4 4L9 9" />
-                    </svg>
-                </a>
+                <div class="p-5">
+                    <a href="/publikasi/{{ $post->slug }}">
+                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 h-28 overflow-hidden">{{
+                            $post->title }}</h5>
+                        <p class="mb-3 font-normal text-gray-700 text-justify h-52">{{ $post->excerpt }}</p>
+                        <div class="flex justify-between text-xs">
+                            <h5><i class="fa-solid fa-user"></i> {{ $post->user->name }}</h5>
+                            <h5>{{ $post->category->name }}</h5>
+                        </div>
+                    </a>
+                </div>
             </div>
-        </div>
+        </a>
         @endforeach
+    </div>
+    <div class="flex justify-center">
+        <a href="/publikasi"
+            class="transition duration-300 ease-in-out py-3 px-6 text-center text-white bg-red-500 rounded-md hover:bg-red-600">Lihat
+            Publikasi <i class="fa-solid fa-arrow-right text-sm"></i>
+        </a>
     </div>
 </div>
 
 <div class="py-8 bg-[#f7f7f7]">
-    <h1 class="text-4xl my-4 text-[#213d5d] ">Prestasi Siswa</h1>
-    <h1 class="mb-4 text-[#213d5d]">Galeri prestasi yang diraih oleh siswa SMK Buddhi</h1>
-    <div class="flex flex-wrap justify-center flex-row gap-4">
-        @foreach($prestasis->take(4) as $prestasi)
-        <div class="w-full">
-            <div class="mx-auto max-w-sm">
-                <div class="bg-white p-5 shadow-md rounded-md text-center">
-                    <img src="{{ asset('storage/' . $prestasi->gambar) }}" alt="{{ $prestasi->name }} Image"
-                        class="w-full object-cover rounded-md h-80">
-                    <p class="mt-4 text-lg font-semibold">{{ $prestasi->name }}</p>
-                </div>
-            </div>
+    <div class="text-center">
+        <h1 class="text-4xl my-4 text-[#213d5d] font-semibold">Prestasi Siswa</h1>
+        <h1 class="mb-4 text-[#213d5d] font-normal">Galeri prestasi yang diraih oleh siswa-siswi SMK Buddhi.</h1>
+    </div>
+    <div class="flex flex-wrap justify-center py-8">
+        @foreach($prestasis as $prestasi)
+        <div class="bg-white m-5 p-5 shadow-md w-[300px] rounded-md">
+            <img src="{{ asset('storage/' . $prestasi->gambar) }}" alt="{{ $prestasi->name }} Image"
+                class="w-full object-cover rounded-md h-80">
+            <p class="mt-4 text-lg font-semibold">{{ $prestasi->name }}</p>
         </div>
         @endforeach
     </div>
-    <div class="mt-8">
-        <a href="/prestasi" class="block w-32 py-2 text-center text-white bg-red-500 rounded-md hover:bg-red-600">Load
-            More</a>
+    <div class="flex justify-center">
+        <a href="/prestasi"
+            class="transition duration-300 ease-in-out py-3 px-6 text-center text-white bg-red-500 rounded-md hover:bg-red-600">Lihat
+            Prestasi <i class="fa-solid fa-arrow-right text-sm"></i></a>
     </div>
 </div>
 

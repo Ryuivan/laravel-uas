@@ -63,13 +63,13 @@
             </div>
 
             <div>
-                <label for="gambar" class="block text-sm font-medium text-gray-600">{{ __('Image') }}</label>
+                <label for="image" class="block text-sm font-medium text-gray-600">{{ __('Image') }}</label>
                 <img class="img-preview">
                 <input
-                    class="mt-1 block w-full mb-5 text-xs text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 @error('gambar') border-red-500 @enderror"
-                    id="gambar" type="file" value="{{ old('gambar') }}" name="gambar" onchange="previewImage()">
+                    class="mt-1 block w-full mb-5 text-xs text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 @error('image') border-red-500 @enderror"
+                    id="image" type="file" value="{{ old('image') }}" name="image" onchange="previewImage()">
 
-                @error('gambar')
+                @error('image')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
             </div>

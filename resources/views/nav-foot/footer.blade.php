@@ -1,6 +1,6 @@
 <footer class="bg-[#213d5d] text-white w-full">
-    <div class="container mx-auto px-3 pt-12 flex flex-wrap flex-col md:flex-row gap-4">
-        <div class="mx-auto mb-4 xl:w-1/5 " >
+    <div class="container mx-auto px-3 pt-12 pb-4 flex flex-wrap flex-col md:flex-row gap-4">
+        <div class="mx-auto mb-5 xl:w-1/5 " >
             <img src="{{ asset('assets/logo/logo.png') }}" class="w-36 h-36 mx-auto" alt="Logo Buddhi" />
         </div>
         <div class="mx-auto mb-2 text-center w-1/2 md:text-left md:w-1/5">

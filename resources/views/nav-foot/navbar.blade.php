@@ -80,6 +80,9 @@
                                 <li>
                                     <a href="/prestasi" class="block px-4 py-2 hover:bg-gray-100">Prestasi</a>
                                 </li>
+                                <li>
+                                    <a href="/publikasi" class="block px-4 py-2 hover:bg-gray-100">Publikasi</a>
+                                </li>
                             </ul>
                         </div>
                     </li>

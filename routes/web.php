@@ -24,6 +24,7 @@ use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\PublikasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,7 @@ use App\Http\Controllers\GalleryController;
 Route::get('/', function () {
     $carousels = Carousel::latest()->get();
     $posts = Post::latest()->take(3)->get();
-    $prestasi = Prestasi::latest()->take(3)->get();
+    $prestasi = Prestasi::latest()->take(4)->get();
 
     return view('index', [
         "title" => "Home",
@@ -115,7 +116,6 @@ Route::get('/login', function () {
     ]);
 })->name('login');
 
-
 Auth::routes();
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login')->middleware('guest');
@@ -131,9 +131,6 @@ Route::get('/dashboard', function () {
     ]);
 })->middleware(['auth', 'admin'])->name('dashboard');
 
-Route::get('/dashboard/posts/checkSlug', [PostController::class, 'checkSlug'])
-    ->middleware('auth');
-
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 
@@ -141,6 +138,13 @@ Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showRese
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 Route::resource('/dashboard/posts', PostController::class)->middleware(['auth', 'admin']);
+Route::get('/dashboard/posts/checkSlug', [PostController::class, 'checkSlug'])
+    ->middleware('auth');
+
+// Route::resource('/publikasi', PublikasiController::class);
+Route::get('/publikasi', [PublikasiController::class, 'index'])->name('publikasi.index');
+Route::get('/publikasi/{post:slug}', [PublikasiController::class, 'show'])->name('publikasi.show');
+
 Route::resource('/dashboard/categories', CategoryController::class)->middleware(['auth', 'admin']);
 
 Route::resource('/dashboard/users', UserController::class)->middleware(['auth', 'admin']);
@@ -183,13 +187,13 @@ Route::get('prestasi', function () {
 });
 
 Route::resource('/dashboard/carousels', CarouselController::class)->middleware(['auth', 'admin']);
-Route::get('carousel', function(){
+Route::get('carousel', function () {
     $carousels = Carousel::latest()->get();
     return view('carousel', [
         'title' => 'Carousel',
         'carousels' => $carousels,
     ]);
-});  
+});
 
 Route::resource('/dashboard/galleries', GalleryController::class)->middleware(['auth', 'admin']);
 Route::get('gallery', function () {

@@ -65,7 +65,7 @@
             </div>
 
             <div>
-                <label for="gambar" class="block text-sm font-medium text-gray-600">{{ __('Image') }}</label>
+                <label for="image" class="block text-sm font-medium text-gray-600">{{ __('Image') }}</label>
                 <input type="hidden" name="oldImage" value="{{ $post->image }}">
                 @if ($post->image)
                 <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}"
@@ -77,10 +77,10 @@
                 <img class="img-preview">
                 <input
                     class="mt-1 block w-full mb-5 text-xs text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 @error('image') border-red-500 @enderror"
-                    id="gambar" type="file" value="{{ old('gambar', $post->image) }}" name="gambar"
+                    id="image" type="file" value="{{ old('image', $post->image) }}" name="image"
                     onchange="previewImage()">
 
-                @error('gambar')
+                @error('image')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
             </div>

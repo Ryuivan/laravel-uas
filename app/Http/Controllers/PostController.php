@@ -92,7 +92,7 @@ class PostController extends Controller
             'title' => 'required|max:255',
             'category_id' => 'required',
             'body' => 'required',
-            'gambar' => 'image|mimes:jpg,jpeg,png|file|max:1024'
+            'image' => 'image|mimes:jpg,jpeg,png|file|max:1024'
         ];
 
         if ($request->slug != $post->slug) {
@@ -104,11 +104,11 @@ class PostController extends Controller
         $validateData['user_id'] = auth()->user()->id;
         $validateData['excerpt'] = Str::limit(strip_tags($request->body), 200);
 
-        if ($request->file('gambar')) {
+        if ($request->file('image')) {
             if ($request->oldImage) {
                 Storage::delete($request->oldImage);
             }
-            $validateData['gambar'] = $request->file('gambar')->storePublicly('posts', 'public');
+            $validateData['image'] = $request->file('image')->storePublicly('posts', 'public');
         }
 
         $post = Post::findOrFail($post->id);
@@ -118,7 +118,7 @@ class PostController extends Controller
         $post->body = $validateData['body'];
         $post->user_id = $validateData['user_id'];
         $post->excerpt = $validateData['excerpt'];
-        if ($request->file('gambar')) $post->image = $validateData['gambar'];
+        if ($request->file('image')) $post->image = $validateData['image'];
         $post->save();
 
         return redirect('/dashboard/posts')->with('success', 'Post updated successfully!');
